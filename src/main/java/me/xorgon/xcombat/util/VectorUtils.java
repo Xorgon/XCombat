@@ -1,7 +1,5 @@
 package me.xorgon.xcombat.util;
 
-import org.bukkit.Location;
-import org.bukkit.entity.Entity;
 import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
@@ -13,6 +11,14 @@ import java.util.Random;
  */
 public class VectorUtils {
 
+    private static Random rand = new Random();
+
+    /**
+     * Method used to get a vector with a changed pitch from the original vector.
+     * @param vector the original vector.
+     * @param offset the change in pitch.
+     * @return vector with changed pitch.
+     */
     public static Vector changePitch(Vector vector, Double offset) {
         double length = vector.length();
         //Changing from Pitch into vector.
@@ -22,6 +28,12 @@ public class VectorUtils {
         return new Vector(vector.getX(), length * Math.sin(newPitch), vector.getZ());
     }
 
+    /**
+     * Method used to get a vector with a changed yaw from the original vector.
+     * @param vector the original vector.
+     * @param offset the change in yaw.
+     * @return vector with changed yaw.
+     */
     public static Vector changeYaw(Vector vector, Double offset) {
         double length = vector.length();
         double x = vector.getX();
@@ -35,11 +47,16 @@ public class VectorUtils {
         return new Vector(newX, vector.getY(), newZ);
     }
 
+    /**
+     * Method to get a list of random vectors with a specified spread.
+     * @param vect the base vector from which the other vectors are generated.
+     * @param maxAngle the maximum spread of the vectors.
+     * @param k the number of vectors to generate.
+     * @return list of random vectors.
+     */
     public static List<Vector> getVectorSpread(Vector vect, Double maxAngle, Integer k) {
 
         List<Vector> vectors = new ArrayList<>();
-
-        Random rand = new Random();
 
         for (int n = 1; n <= k; n++) {
             //Gets a new yaw offset within limits and applies it to the vector.
