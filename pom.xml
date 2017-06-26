@@ -31,8 +31,7 @@
         <dependency>
             <groupId>de.slikey</groupId>
             <artifactId>EffectLib</artifactId>
-            <version>3.0</version>
-            <scope>provided</scope>
+            <version>3.1</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -75,16 +74,13 @@
                     <artifactSet>
                         <includes>
                             <include>org.mcstats.*:*</include>
+                            <include>de.slikey:EffectLib</include>
                         </includes>
                     </artifactSet>
                     <relocations>
                         <relocation>
                             <pattern>org.mcstats</pattern>
-                            <shadedPattern>me.xorgon.xfilter</shadedPattern>
-                        </relocation>
-                        <relocation>
-                            <pattern>de.slikey</pattern>
-                            <shadedPattern>org.myplugin.slikey</shadedPattern>
+                            <shadedPattern>me.xorgon.xcombat</shadedPattern>
                         </relocation>
                     </relocations>
                 </configuration>
@@ -106,6 +102,7 @@
                 <directory>${basedir}/src/main/resources/</directory>
                 <includes>
                     <include>plugin.yml</include>
+                    <include>LICENSE.txt</include>
                 </includes>
             </resource>
         </resources>

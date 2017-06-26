@@ -1,5 +1,8 @@
 package me.xorgon.xcombat.util;
 
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
@@ -25,7 +28,7 @@ public class VectorUtils {
         Double oldPitch = Math.asin(vector.getY() / length);
         Double newPitch = oldPitch + offset;
         //Changing from vector into Pitch.
-        return new Vector(vector.getX(), length * Math.sin(newPitch), vector.getZ());
+        return new Vector(vector.getX(), length * Math.sin(Math.toRadians(newPitch)), vector.getZ());
     }
 
     /**
@@ -39,8 +42,13 @@ public class VectorUtils {
         double x = vector.getX();
         double z = vector.getZ();
         //Changing from vector into Yaw.
-        Double oldYaw = Math.atan(-x / z);
-        Double newYaw = oldYaw + offset;
+        double oldYaw;
+        if(z == 0){
+            oldYaw = 90.0;
+        } else {
+            oldYaw = Math.atan(-x / z);
+        }
+        double newYaw = oldYaw + offset;
         //Changing from Yaw into vector.
         double newX = -(length * Math.cos(Math.toRadians(newYaw)));
         double newZ = length * Math.sin(Math.toRadians(newYaw));
@@ -60,10 +68,10 @@ public class VectorUtils {
 
         for (int n = 1; n <= k; n++) {
             //Gets a new yaw offset within limits and applies it to the vector.
-            Double yawOff = rand.nextDouble() * maxAngle;
+            Double yawOff = (rand.nextDouble() * 2 - 1) * maxAngle;
             Vector yawedVect = changeYaw(vect, yawOff);
             //Gets a new pitch offset within limits and applies it to the vector.
-            Double pitchOff = rand.nextDouble() * maxAngle;
+            Double pitchOff = (rand.nextDouble() * 2 - 1 ) * maxAngle;
             Vector newVect = changePitch(yawedVect, pitchOff);
             vectors.add(newVect);
         }
